@@ -1,5 +1,5 @@
 
-package io.github.weissfeuer.DistanceLeveledMonsters;
+package io.github.weissfeuer.distanceleveledmonsters;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
