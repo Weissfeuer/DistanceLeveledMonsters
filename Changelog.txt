@@ -1,0 +1,11 @@
+DistanceLeveledMonsters Changelog:
+
+--- 1.0.0 - Initial release ---
+
+ * Monsters gain DistanceLevel after a certain amout of blocks from spawn
+ * Monsters gain Health / Attack depending on DistanceLevel
+   * This can be configured for each monster seperately
+ * Monsters give additional EXP / Drops depending on DistanceLevel
+   * Applies to all monsters
+ * Singular multipliers can be disabled by setting them to 0.0
+ * /DistanceLevel shows the current DistanceLevel of monster spawned in the players area (checks the block the player is standing on)
