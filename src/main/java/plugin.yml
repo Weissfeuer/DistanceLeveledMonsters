@@ -1,10 +1,11 @@
 name: DistanceLeveledMonsters
-version: 1.0.0
+version: 1.1.0
 api-version: 1.13
 author: Weissfeuer
+website: https://github.com/Weissfeuer/DistanceLeveledMonsters
 description: Scales monster health / attack based on distance from spawn
 main: io.github.weissfeuer.distanceleveledmonsters.DistanceLeveledMonsters
 commands:
    DistanceLevel:
       description: Displays the monster level scaling at your current position.
-      usage: /DistanceLevel
+      usage: /DistanceLevel [X-Coord] [Y-Coord]

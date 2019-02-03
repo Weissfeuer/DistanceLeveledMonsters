@@ -16,7 +16,8 @@ https://github.com/Rhidlor/ScalingMobDifficulty
 ```
 Commands:
 
-/DistanceLevel		show current monster scaling in your area
+/DistanceLevel                        show current monster scaling in your area
+/DistanceLevel [X-Coord] [Y-Coord]    show current monster scaling at the coordinates
 ```
 
 

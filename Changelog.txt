@@ -1,5 +1,10 @@
 DistanceLeveledMonsters Changelog:
 
+--- 1.1.0 ---
+
+ * Added coordinate option to command /DistanceLevel [X-Coord] [Y-Coord]
+ * Set default scaling values to something "balanced"
+
 --- 1.0.0 - Initial release ---
 
  * Monsters gain DistanceLevel after a certain amout of blocks from spawn

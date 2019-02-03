@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.Location;
 
 public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
 
@@ -145,12 +146,31 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    	// default command /DistanceLevel to display monster level around the player
     	if (cmd.getName().equalsIgnoreCase("DistanceLevel") && args.length == 0) {
-    		if (!(sender instanceof Player)) {
-    			sender.sendMessage("This command can only be run by a player.");
-    		} else {
+    		if (sender instanceof Player) {
     			Player player = (Player) sender;
     			sender.sendMessage("Current Monsterlevel: " + Math.round((int) player.getLocation().distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
+    		} else {
+    			sender.sendMessage("This command can only be run by a player.");
+    		}
+    		return true;
+    	}
+    	// manual coordinate option of the command /DistanceLevel
+    	if (cmd.getName().equalsIgnoreCase("DistanceLevel") && args.length == 2) {
+    		if (sender instanceof Player) {
+    			Player player = (Player) sender;
+    			try {
+    				double X = Double.parseDouble(args[0]);
+    				double Y = Double.parseDouble(args[1]);
+        			Location testLocation = new Location (player.getWorld(), X, Y, 0.0);
+        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
+        		} catch (NumberFormatException e) {
+        			return false;
+        		}
+    		}
+    		else {
+    			sender.sendMessage("This command can only be run by a player.");
     		}
     		return true;
     	}
