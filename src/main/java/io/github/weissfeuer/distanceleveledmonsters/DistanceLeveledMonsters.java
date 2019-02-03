@@ -32,32 +32,53 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
             
             													// Set any to 0.0 to disable
             
-            getConfig().set("ExpMultiplier", 0.1);				// Additional EXP per level, 1.0 meaning for each level you get the full EXP amount again
-            getConfig().set("DropMultiplier", 0.1);				// Additional Drops per level, 1.0 meaning for each level you get the full Drop amount again
+            getConfig().set("ExpMultiplier", 0.05);				// Additional EXP per level, 1.0 meaning for each level you get the full EXP amount again
+            getConfig().set("DropMultiplier", 0.05);				// Additional Drops per level, 1.0 meaning for each level you get the full Drop amount again
             													// only works for stackables, rounds down
             												
-            getConfig().set("BlazeHealthScaling", 1.0);			// Adds 1 health every 1/x level - the calculation is a reverse, a higher number means more health each level
-            getConfig().set("BlazeAttackScaling", 1.0);			// Same for damage
-            getConfig().set("CaveSpiderHealthScaling", 1.0);	// set any to 0.0 to disable scaling
-            getConfig().set("CaveSpiderAttackScaling", 1.0);
-            getConfig().set("CreeperHealthScaling", 1.0);
-            getConfig().set("CreeperAttackScaling", 1.0);
-            getConfig().set("EndermanHealthScaling", 1.0);
-            getConfig().set("EndermanAttackScaling", 1.0);
-            getConfig().set("PigZombieHealthScaling", 1.0);
-            getConfig().set("PigZombieAttackScaling", 1.0);
-            getConfig().set("SilverfishHealthScaling", 1.0);
-            getConfig().set("SilverfishAttackScaling", 1.0);
-            getConfig().set("SkeletonHealthScaling", 1.0);
-            getConfig().set("SkeletonAttackScaling", 1.0);
-            getConfig().set("SpiderHealthScaling", 1.0);
-            getConfig().set("SpiderAttackScaling", 1.0);
-            getConfig().set("WitchHealthScaling", 1.0);
-            getConfig().set("WitchAttackScaling", 1.0);
-            getConfig().set("WitherHealthScaling", 1.0);
-            getConfig().set("WitherAttackScaling", 1.0);
-            getConfig().set("ZombieHealthScaling", 1.0);
-            getConfig().set("ZombieAttackScaling", 1.0); 
+            getConfig().set("BlazeHealthScaling", 0.5);			// Adds 1 health every 1/x level - the calculation is a reverse, a higher number means more health each level
+            getConfig().set("BlazeAttackScaling", 0.3);			// Same for damage
+            getConfig().set("CaveSpiderHealthScaling", 0.25);	// set any to 0.0 to disable scaling
+            getConfig().set("CaveSpiderAttackScaling", 0.1);
+            getConfig().set("CreeperHealthScaling", 0.25);
+            getConfig().set("CreeperAttackScaling", 0.75);
+            getConfig().set("DrownedHealthScaling", 0.33);
+            getConfig().set("DrownedAttackScaling", 0.33);
+            getConfig().set("ElderGuardianHealthScaling", 0.15);
+            getConfig().set("ElderGuardianAttackScaling", 0.15);
+            getConfig().set("EndermanHealthScaling", 0.25);
+            getConfig().set("EndermanAttackScaling", 0.5);
+            // Endermite
+            getConfig().set("EvokerHealthScaling", 0.1);
+            getConfig().set("EvokerAttackScaling", 0.1);
+            getConfig().set("GuardianHealthScaling", 0.25);
+            getConfig().set("GuardianAttackScaling", 0.25);
+            getConfig().set("HuskHealthScaling", 0.25);
+            getConfig().set("HuskAttackScaling", 0.50);
+            getConfig().set("PigZombieHealthScaling", 0.33);
+            getConfig().set("PigZombieAttackScaling", 0.5);
+            getConfig().set("SilverfishHealthScaling", 0.1);
+            getConfig().set("SilverfishAttackScaling", 0.25);
+            getConfig().set("SkeletonHealthScaling", 0.25);
+            getConfig().set("SkeletonAttackScaling", 0.25);
+            getConfig().set("SpiderHealthScaling", 0.33);
+            getConfig().set("SpiderAttackScaling", 0.33);
+            getConfig().set("StrayHealthScaling", 0.15);
+            getConfig().set("StrayAttackScaling", 0.25);
+            getConfig().set("VexHealthScaling", 0.0);
+            getConfig().set("VexAttackScaling", 0.15);
+            getConfig().set("VindicatorHealthScaling", 0.20);
+            getConfig().set("VindicatorAttackScaling", 0.20);
+            getConfig().set("WitchHealthScaling", 0.25);
+            getConfig().set("WitchAttackScaling", 0.5);
+            getConfig().set("WitherSkeletonHealthScaling", 0.15);
+            getConfig().set("WitherSkeletonAttackScaling", 0.2);
+            getConfig().set("WitherHealthScaling", 0.1);
+            getConfig().set("WitherAttackScaling", 0.1);
+            getConfig().set("ZombieHealthScaling", 0.33);
+            getConfig().set("ZombieAttackScaling", 0.33); 
+            getConfig().set("ZombieVillagerHealthScaling", 0.40);
+            getConfig().set("ZombieVillagerAttackScaling", 0.50);
             
         } else getConfig().options().copyDefaults(true);
         saveConfig();
@@ -69,18 +90,28 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         if (!(event.getEntity() instanceof Monster)) return;
         Monster mob = (Monster) event.getEntity();
         
-        double monsterHealthScaling = 1.0;
-        if (mob instanceof Blaze) 		monsterHealthScaling = (getConfig().getDouble("BlazeHealthScaling"));
-        if (mob instanceof Spider)		monsterHealthScaling = (getConfig().getDouble("SpiderHealthScaling"));
-        if (mob instanceof CaveSpider)	monsterHealthScaling = (getConfig().getDouble("CaveSpiderHealthScaling"));
-        if (mob instanceof Enderman) 	monsterHealthScaling = (getConfig().getDouble("EndermanHealthScaling"));
-        if (mob instanceof Zombie) 		monsterHealthScaling = (getConfig().getDouble("ZombieHealthScaling"));
-        if (mob instanceof PigZombie) 	monsterHealthScaling = (getConfig().getDouble("PigZombieHealthScaling"));
-        if (mob instanceof Silverfish) 	monsterHealthScaling = (getConfig().getDouble("SilverfishHealthScaling"));
-        if (mob instanceof Skeleton) 	monsterHealthScaling = (getConfig().getDouble("SkeletonHealthScaling"));
-        if (mob instanceof Witch) 		monsterHealthScaling = (getConfig().getDouble("WitchHealthScaling"));
-        if (mob instanceof Wither) 		monsterHealthScaling = (getConfig().getDouble("WitherHealthScaling"));
-        if (mob instanceof Creeper) 	monsterHealthScaling = (getConfig().getDouble("CreeperHealthScaling"));
+        double monsterHealthScaling = 0.0;
+        if (mob instanceof Blaze) 			monsterHealthScaling = (getConfig().getDouble("BlazeHealthScaling"));
+        if (mob instanceof Spider)			monsterHealthScaling = (getConfig().getDouble("SpiderHealthScaling"));
+        if (mob instanceof CaveSpider)		monsterHealthScaling = (getConfig().getDouble("CaveSpiderHealthScaling"));
+        if (mob instanceof Enderman) 		monsterHealthScaling = (getConfig().getDouble("EndermanHealthScaling"));
+        if (mob instanceof Zombie) 			monsterHealthScaling = (getConfig().getDouble("ZombieHealthScaling"));
+        if (mob instanceof PigZombie) 		monsterHealthScaling = (getConfig().getDouble("PigZombieHealthScaling"));
+        if (mob instanceof ZombieVillager) 	monsterHealthScaling = (getConfig().getDouble("ZombieVillagerHealthScaling"));
+        if (mob instanceof Husk) 			monsterHealthScaling = (getConfig().getDouble("HuskHealthScaling"));
+        if (mob instanceof Drowned) 		monsterHealthScaling = (getConfig().getDouble("DrownedHealthScaling"));
+        if (mob instanceof Silverfish) 		monsterHealthScaling = (getConfig().getDouble("SilverfishHealthScaling"));
+        if (mob instanceof Skeleton) 		monsterHealthScaling = (getConfig().getDouble("SkeletonHealthScaling"));
+        if (mob instanceof WitherSkeleton) 	monsterHealthScaling = (getConfig().getDouble("WitherSkeletonHealthScaling"));
+        if (mob instanceof Stray) 			monsterHealthScaling = (getConfig().getDouble("StrayHealthScaling"));
+        if (mob instanceof Witch) 			monsterHealthScaling = (getConfig().getDouble("WitchHealthScaling"));
+        if (mob instanceof Wither) 			monsterHealthScaling = (getConfig().getDouble("WitherHealthScaling"));
+        if (mob instanceof Creeper) 		monsterHealthScaling = (getConfig().getDouble("CreeperHealthScaling"));
+        if (mob instanceof Evoker) 			monsterHealthScaling = (getConfig().getDouble("EvokerHealthScaling"));
+        if (mob instanceof Vindicator) 		monsterHealthScaling = (getConfig().getDouble("VindicatorHealthScaling"));
+        if (mob instanceof Vex) 			monsterHealthScaling = (getConfig().getDouble("VexHealthScaling"));
+        if (mob instanceof Guardian) 		monsterHealthScaling = (getConfig().getDouble("GuardianHealthScaling"));
+        if (mob instanceof ElderGuardian) 	monsterHealthScaling = (getConfig().getDouble("ElderGuardianHealthScaling"));
         	
         if (monsterHealthScaling > 0.0) {
         	// LevelMultiplier = distance from spawn / Level per Blocks
@@ -98,18 +129,28 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         if (!(event.getDamager() instanceof Monster)) return;
         Monster mob = (Monster) event.getDamager();
         
-        double monsterAttackScaling = 1.0;
-        if (mob instanceof Blaze) 		monsterAttackScaling = (getConfig().getDouble("BlazeAttackScaling"));
-        if (mob instanceof Spider)		monsterAttackScaling = (getConfig().getDouble("SpiderAttackScaling"));
-        if (mob instanceof CaveSpider)	monsterAttackScaling = (getConfig().getDouble("CaveSpiderAttackScaling"));
-        if (mob instanceof Enderman) 	monsterAttackScaling = (getConfig().getDouble("EndermanAttackScaling"));
-        if (mob instanceof Zombie) 		monsterAttackScaling = (getConfig().getDouble("ZombieAttackScaling"));
-        if (mob instanceof PigZombie) 	monsterAttackScaling = (getConfig().getDouble("PigZombieAttackScaling"));
-        if (mob instanceof Silverfish) 	monsterAttackScaling = (getConfig().getDouble("SilverfishAttackScaling"));
-        if (mob instanceof Skeleton) 	monsterAttackScaling = (getConfig().getDouble("SkeletonAttackScaling"));
-        if (mob instanceof Witch) 		monsterAttackScaling = (getConfig().getDouble("WitchAttackScaling"));
-        if (mob instanceof Wither) 		monsterAttackScaling = (getConfig().getDouble("WitherAttackScaling"));
-        if (mob instanceof Creeper) 	monsterAttackScaling = (getConfig().getDouble("CreeperAttackScaling"));
+        double monsterAttackScaling = 0.0;
+        if (mob instanceof Blaze) 			monsterAttackScaling = (getConfig().getDouble("BlazeAttackScaling"));
+        if (mob instanceof Spider)			monsterAttackScaling = (getConfig().getDouble("SpiderAttackScaling"));
+        if (mob instanceof CaveSpider)		monsterAttackScaling = (getConfig().getDouble("CaveSpiderAttackScaling"));
+        if (mob instanceof Enderman) 		monsterAttackScaling = (getConfig().getDouble("EndermanAttackScaling"));
+        if (mob instanceof Zombie) 			monsterAttackScaling = (getConfig().getDouble("ZombieAttackScaling"));
+        if (mob instanceof PigZombie) 		monsterAttackScaling = (getConfig().getDouble("PigZombieAttackScaling"));
+        if (mob instanceof ZombieVillager) 	monsterAttackScaling = (getConfig().getDouble("ZombieVillagerAttackScaling"));
+        if (mob instanceof Husk) 			monsterAttackScaling = (getConfig().getDouble("HuskAttackScaling"));
+        if (mob instanceof Drowned) 		monsterAttackScaling = (getConfig().getDouble("DrownedAttackScaling"));
+        if (mob instanceof Silverfish) 		monsterAttackScaling = (getConfig().getDouble("SilverfishAttackScaling"));
+        if (mob instanceof Skeleton) 		monsterAttackScaling = (getConfig().getDouble("SkeletonAttackScaling"));
+        if (mob instanceof WitherSkeleton) 	monsterAttackScaling = (getConfig().getDouble("WitherSkeletonAttackScaling"));
+        if (mob instanceof Stray) 			monsterAttackScaling = (getConfig().getDouble("StrayAttackScaling"));
+        if (mob instanceof Witch) 			monsterAttackScaling = (getConfig().getDouble("WitchAttackScaling"));
+        if (mob instanceof Wither) 			monsterAttackScaling = (getConfig().getDouble("WitherAttackScaling"));
+        if (mob instanceof Creeper) 		monsterAttackScaling = (getConfig().getDouble("CreeperAttackScaling"));
+        if (mob instanceof Evoker) 			monsterAttackScaling = (getConfig().getDouble("EvokerAttackScaling"));
+        if (mob instanceof Vindicator) 		monsterAttackScaling = (getConfig().getDouble("VindicatorAttackScaling"));
+        if (mob instanceof Vex) 			monsterAttackScaling = (getConfig().getDouble("VexAttackScaling"));
+        if (mob instanceof Guardian) 		monsterAttackScaling = (getConfig().getDouble("GuardianAttackScaling"));
+        if (mob instanceof ElderGuardian) 	monsterAttackScaling = (getConfig().getDouble("ElderGuardianAttackScaling"));
         
         if (monsterAttackScaling > 0.0) {
         	// LevelMultiplier = distance from spawn / Level per Blocks

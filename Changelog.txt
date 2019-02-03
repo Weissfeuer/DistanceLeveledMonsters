@@ -4,6 +4,7 @@ DistanceLeveledMonsters Changelog:
 
  * Added coordinate option to command /DistanceLevel [X-Coord] [Y-Coord]
  * Set default scaling values to something "balanced"
+ * Added more monsters to be scaled (slimes are not monsters, can't be scaled)
 
 --- 1.0.0 - Initial release ---
 

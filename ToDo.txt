@@ -1,3 +1,11 @@
-ToDo:
+ToDo light:
+ 
+ *
+ 
+ToDo focus:  
 
- * Add recommended scaling for monsters
+ * Commandline /DistanceLevel
+ 
+ToDo redesign : 
+ 
+ * Scaling based on world / new config formal (xml?)
