@@ -44,7 +44,6 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
-        //loadConfig();
         saveDefaultConfig();
     }
 
@@ -164,6 +163,9 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     			if (getConfig().getInt(player.getWorld().getName() + ".LevelDistance") != 0) {
     				sender.sendMessage("Current Monsterlevel: " + Math.round((int) player.getLocation().distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt(player.getWorld().getName() + ".LevelDistance"))));
     			}
+    			else {
+    				sender.sendMessage("This world is not scaled");
+    			}
     		} else {
     			sender.sendMessage("This command can only be run by a player.");
     		}
@@ -182,6 +184,9 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
 	        		} catch (NumberFormatException e) {
 	        			return false;
 	        		}
+    			}
+    			else {
+    				sender.sendMessage("This world is not scaled");
     			}
     		}
     		else {
