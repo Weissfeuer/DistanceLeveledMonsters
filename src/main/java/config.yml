@@ -1,0 +1,75 @@
+# Add any worlds you wish to manage into the list
+Worlds:
+  - world
+#  - world_nether
+#  - world_the_end
+
+# Any world managed needs a configuration like the one below, copy and past the example and rename "world" to your world name
+world:
+  LevelDistance: 1000
+  Scaling:
+    ExpMultiplier: 0.1
+    DropMultiplier: 0.1
+    Blaze:
+      Health: 0.5
+      Attack: 0.3
+    CaveSpider:
+      Health: 0.25
+      Attack: 0.1
+    Creeper:
+      Health: 0.25
+      Attack: 0.75
+    Drowned:
+      Health: 0.33
+      Attack: 0.33
+    ElderGuardian:
+      Health: 0.15
+      Attack: 0.15
+    Enderman:
+      Health: 0.25
+      Attack: 0.5
+    Evoker:
+      Health: 0.1
+      Attack: 0.1
+    Guardian:
+      Health: 0.25
+      Attack: 0.25
+    Husk:
+      Health: 0.25
+      Attack: 0.5
+    PigZombie:
+      Health: 0.33
+      Attack: 0.5
+    Silverfish:
+      Health: 0.1
+      Attack: 0.25
+    Skeleton:
+      Health: 0.25
+      Attack: 0.25
+    Spider:
+      Health: 0.33
+      Attack: 0.33
+    Stray:
+      Health: 0.15
+      Attack: 0.25
+    Vex:
+      Health: 0.0
+      Attack: 0.15
+    Vindicator:
+      Health: 0.2
+      Attack: 0.2
+    Witch:
+      Health: 0.25
+      Attack: 0.5
+    WitherSkeleton:
+      Health: 0.15
+      Attack: 0.2
+    Wither:
+      Health: 0.1
+      Attack: 0.1
+    Zombie:
+      Health: 0.33
+      Attack: 0.33
+    ZombieVillager:
+      Health: 0.4
+      Attack: 0.5

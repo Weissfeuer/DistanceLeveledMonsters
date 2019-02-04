@@ -44,9 +44,11 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
-        loadConfig();
+        //loadConfig();
+        saveDefaultConfig();
     }
 
+    /*
     private void loadConfig() {
         if (getConfig().get("ResetToDefaults") == null || getConfig().getBoolean("ResetToDefaults") == true) {
         	getConfig().set("ResetToDefaults", false);
@@ -106,39 +108,42 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         } else getConfig().options().copyDefaults(true);
         saveConfig();
     }
+    */
 
     @EventHandler
-    // On Spawn: Scale Health, Gear Zombies
+    // On Spawn: Scale Health
     public void onMonsterSpawn(EntitySpawnEvent event) {
         if (!(event.getEntity() instanceof Monster)) return;
         Monster mob = (Monster) event.getEntity();
         
         double monsterHealthScaling = 0.0;
-        if (mob instanceof Blaze) 			monsterHealthScaling = (getConfig().getDouble("BlazeHealthScaling"));
-        if (mob instanceof Spider)			monsterHealthScaling = (getConfig().getDouble("SpiderHealthScaling"));
-        if (mob instanceof CaveSpider)		monsterHealthScaling = (getConfig().getDouble("CaveSpiderHealthScaling"));
-        if (mob instanceof Enderman) 		monsterHealthScaling = (getConfig().getDouble("EndermanHealthScaling"));
-        if (mob instanceof Zombie) 			monsterHealthScaling = (getConfig().getDouble("ZombieHealthScaling"));
-        if (mob instanceof PigZombie) 		monsterHealthScaling = (getConfig().getDouble("PigZombieHealthScaling"));
-        if (mob instanceof ZombieVillager) 	monsterHealthScaling = (getConfig().getDouble("ZombieVillagerHealthScaling"));
-        if (mob instanceof Husk) 			monsterHealthScaling = (getConfig().getDouble("HuskHealthScaling"));
-        if (mob instanceof Drowned) 		monsterHealthScaling = (getConfig().getDouble("DrownedHealthScaling"));
-        if (mob instanceof Silverfish) 		monsterHealthScaling = (getConfig().getDouble("SilverfishHealthScaling"));
-        if (mob instanceof Skeleton) 		monsterHealthScaling = (getConfig().getDouble("SkeletonHealthScaling"));
-        if (mob instanceof WitherSkeleton) 	monsterHealthScaling = (getConfig().getDouble("WitherSkeletonHealthScaling"));
-        if (mob instanceof Stray) 			monsterHealthScaling = (getConfig().getDouble("StrayHealthScaling"));
-        if (mob instanceof Witch) 			monsterHealthScaling = (getConfig().getDouble("WitchHealthScaling"));
-        if (mob instanceof Wither) 			monsterHealthScaling = (getConfig().getDouble("WitherHealthScaling"));
-        if (mob instanceof Creeper) 		monsterHealthScaling = (getConfig().getDouble("CreeperHealthScaling"));
-        if (mob instanceof Evoker) 			monsterHealthScaling = (getConfig().getDouble("EvokerHealthScaling"));
-        if (mob instanceof Vindicator) 		monsterHealthScaling = (getConfig().getDouble("VindicatorHealthScaling"));
-        if (mob instanceof Vex) 			monsterHealthScaling = (getConfig().getDouble("VexHealthScaling"));
-        if (mob instanceof Guardian) 		monsterHealthScaling = (getConfig().getDouble("GuardianHealthScaling"));
-        if (mob instanceof ElderGuardian) 	monsterHealthScaling = (getConfig().getDouble("ElderGuardianHealthScaling"));
-        	
+        if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
+	        if (mob instanceof Blaze) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Health"));
+	        if (mob instanceof Spider)			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Health"));
+	        if (mob instanceof CaveSpider)		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Health"));
+	        if (mob instanceof Enderman) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Health"));
+	        if (mob instanceof Zombie) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Health"));
+	        if (mob instanceof PigZombie) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Health"));
+	        if (mob instanceof ZombieVillager) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Health"));
+	        if (mob instanceof Husk) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Health"));
+	        if (mob instanceof Drowned) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Health"));
+	        if (mob instanceof Silverfish) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Health"));
+	        if (mob instanceof Skeleton) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Health"));
+	        if (mob instanceof WitherSkeleton) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Health"));
+	        if (mob instanceof Stray) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Health"));
+	        if (mob instanceof Witch) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Health"));
+	        if (mob instanceof Wither) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Health"));
+	        if (mob instanceof Creeper) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Health"));
+	        if (mob instanceof Evoker) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Health"));
+	        if (mob instanceof Vindicator) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Health"));
+	        if (mob instanceof Vex) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Health"));
+	        if (mob instanceof Guardian) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Health"));
+	        if (mob instanceof ElderGuardian) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Health"));
+        }
+        
         if (monsterHealthScaling > 0.0) {
         	// LevelMultiplier = distance from spawn / Level per Blocks
-        	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"));
+        	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance"));
         	// MaxHealth = Base Health + ( LevelMultiplier * HealthScalingMultiplier )
         	mob.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(mob.getHealth() + (distance  * monsterHealthScaling));
         	// Heal mob on spawn
@@ -153,31 +158,33 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         Monster mob = (Monster) event.getDamager();
         
         double monsterAttackScaling = 0.0;
-        if (mob instanceof Blaze) 			monsterAttackScaling = (getConfig().getDouble("BlazeAttackScaling"));
-        if (mob instanceof Spider)			monsterAttackScaling = (getConfig().getDouble("SpiderAttackScaling"));
-        if (mob instanceof CaveSpider)		monsterAttackScaling = (getConfig().getDouble("CaveSpiderAttackScaling"));
-        if (mob instanceof Enderman) 		monsterAttackScaling = (getConfig().getDouble("EndermanAttackScaling"));
-        if (mob instanceof Zombie) 			monsterAttackScaling = (getConfig().getDouble("ZombieAttackScaling"));
-        if (mob instanceof PigZombie) 		monsterAttackScaling = (getConfig().getDouble("PigZombieAttackScaling"));
-        if (mob instanceof ZombieVillager) 	monsterAttackScaling = (getConfig().getDouble("ZombieVillagerAttackScaling"));
-        if (mob instanceof Husk) 			monsterAttackScaling = (getConfig().getDouble("HuskAttackScaling"));
-        if (mob instanceof Drowned) 		monsterAttackScaling = (getConfig().getDouble("DrownedAttackScaling"));
-        if (mob instanceof Silverfish) 		monsterAttackScaling = (getConfig().getDouble("SilverfishAttackScaling"));
-        if (mob instanceof Skeleton) 		monsterAttackScaling = (getConfig().getDouble("SkeletonAttackScaling"));
-        if (mob instanceof WitherSkeleton) 	monsterAttackScaling = (getConfig().getDouble("WitherSkeletonAttackScaling"));
-        if (mob instanceof Stray) 			monsterAttackScaling = (getConfig().getDouble("StrayAttackScaling"));
-        if (mob instanceof Witch) 			monsterAttackScaling = (getConfig().getDouble("WitchAttackScaling"));
-        if (mob instanceof Wither) 			monsterAttackScaling = (getConfig().getDouble("WitherAttackScaling"));
-        if (mob instanceof Creeper) 		monsterAttackScaling = (getConfig().getDouble("CreeperAttackScaling"));
-        if (mob instanceof Evoker) 			monsterAttackScaling = (getConfig().getDouble("EvokerAttackScaling"));
-        if (mob instanceof Vindicator) 		monsterAttackScaling = (getConfig().getDouble("VindicatorAttackScaling"));
-        if (mob instanceof Vex) 			monsterAttackScaling = (getConfig().getDouble("VexAttackScaling"));
-        if (mob instanceof Guardian) 		monsterAttackScaling = (getConfig().getDouble("GuardianAttackScaling"));
-        if (mob instanceof ElderGuardian) 	monsterAttackScaling = (getConfig().getDouble("ElderGuardianAttackScaling"));
+        if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
+	        if (mob instanceof Blaze) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Attack"));
+	        if (mob instanceof Spider)			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Attack"));
+	        if (mob instanceof CaveSpider)		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Attack"));
+	        if (mob instanceof Enderman) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Attack"));
+	        if (mob instanceof Zombie) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Attack"));
+	        if (mob instanceof PigZombie) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Attack"));
+	        if (mob instanceof ZombieVillager) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Attack"));
+	        if (mob instanceof Husk) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Attack"));
+	        if (mob instanceof Drowned) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Attack"));
+	        if (mob instanceof Silverfish) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Attack"));
+	        if (mob instanceof Skeleton) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Attack"));
+	        if (mob instanceof WitherSkeleton) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Attack"));
+	        if (mob instanceof Stray) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Attack"));
+	        if (mob instanceof Witch) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Attack"));
+	        if (mob instanceof Wither) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Attack"));
+	        if (mob instanceof Creeper) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Attack"));
+	        if (mob instanceof Evoker) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Attack"));
+	        if (mob instanceof Vindicator) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Attack"));
+	        if (mob instanceof Vex) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Attack"));
+	        if (mob instanceof Guardian) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Attack"));
+	        if (mob instanceof ElderGuardian) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Attack"));
+        }
         
         if (monsterAttackScaling > 0.0) {
         	// LevelMultiplier = distance from spawn / Level per Blocks
-        	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"));
+        	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance"));
         	// Damage = Default Damage + ( LevelMultiplier * Attack Mulitplier )
         	event.setDamage(event.getDamage() + ( distance * monsterAttackScaling));
         }
@@ -189,22 +196,24 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         if (!(event.getEntity() instanceof Monster)) return;
         Monster mob = (Monster) event.getEntity();
         
-        // LevelMultiplier = distance from spawn / Level per Blocks
-    	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"));
-    	
-    	if (getConfig().getDouble("ExpMultiplier") > 0.0) {
-    		// EXP = Default EXP + ( Default EXP * LevelMultiplier * EXP Multiplier )
-    		event.setDroppedExp((int) (event.getDroppedExp() + ( event.getDroppedExp() * distance * (getConfig().getDouble("ExpMultiplier")))));
-    	}
-        
-        if (getConfig().getDouble("DropMultiplier") > 0.0) {
-        	// for each item drop
-            for (ItemStack drop : event.getDrops()) {
-            	// don't increase unstackable items
-                if (drop.getMaxStackSize() == 1) continue;
-                // Drop = Default Drop + ( Default Drop * LevelMulitplier * Drop Multiplier )
-                drop.setAmount((int) (drop.getAmount() + ( drop.getAmount() * distance * (getConfig().getDouble("DropMultiplier")))));
-            }
+        if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
+	        // LevelMultiplier = distance from spawn / Level per Blocks
+	    	double distance = mob.getLocation().distance(mob.getWorld().getSpawnLocation()) / (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance"));
+	    	
+	    	if (getConfig().getDouble("ExpMultiplier") > 0.0) {
+	    		// EXP = Default EXP + ( Default EXP * LevelMultiplier * EXP Multiplier )
+	    		event.setDroppedExp((int) (event.getDroppedExp() + ( event.getDroppedExp() * distance * (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ExpMultiplier")))));
+	    	}
+	        
+	        if (getConfig().getDouble("DropMultiplier") > 0.0) {
+	        	// for each item drop
+	            for (ItemStack drop : event.getDrops()) {
+	            	// don't increase unstackable items
+	                if (drop.getMaxStackSize() == 1) continue;
+	                // Drop = Default Drop + ( Default Drop * LevelMulitplier * Drop Multiplier )
+	                drop.setAmount((int) (drop.getAmount() + ( drop.getAmount() * distance * (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.DropMultiplier")))));
+	            }
+	        }
         }
     }
 
@@ -214,7 +223,9 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     	if (cmd.getName().equalsIgnoreCase("DistanceLevel") && args.length == 0) {
     		if (sender instanceof Player) {
     			Player player = (Player) sender;
-    			sender.sendMessage("Current Monsterlevel: " + Math.round((int) player.getLocation().distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
+    			if (getConfig().getInt(player.getWorld().getName() + ".LevelDistance") != 0) {
+    				sender.sendMessage("Current Monsterlevel: " + Math.round((int) player.getLocation().distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt(player.getWorld().getName() + ".LevelDistance"))));
+    			}
     		} else {
     			sender.sendMessage("This command can only be run by a player.");
     		}
@@ -224,14 +235,16 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     	if (cmd.getName().equalsIgnoreCase("DistanceLevel") && args.length == 2) {
     		if (sender instanceof Player) {
     			Player player = (Player) sender;
-    			try {
-    				double X = Double.parseDouble(args[0]);
-    				double Y = Double.parseDouble(args[1]);
-        			Location testLocation = new Location (player.getWorld(), X, Y, 0.0);
-        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
-        		} catch (NumberFormatException e) {
-        			return false;
-        		}
+    			if (getConfig().getInt(player.getWorld().getName() + ".LevelDistance") != 0) {
+	    			try {
+	    				double X = Double.parseDouble(args[0]);
+	    				double Y = Double.parseDouble(args[1]);
+	        			Location testLocation = new Location (player.getWorld(), X, Y, 0.0);
+	        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt(player.getWorld().getName() + ".LevelDistance"))));
+	        		} catch (NumberFormatException e) {
+	        			return false;
+	        		}
+    			}
     		}
     		else {
     			sender.sendMessage("This command can only be run by a player.");
@@ -250,7 +263,7 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     					return true;
     				}
         			Location testLocation = new Location (world, X, Y, 0.0);
-        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
+        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt(world.getName() + ".LevelDistance"))));
         		} catch (NumberFormatException e) {
         			return false;
         		}

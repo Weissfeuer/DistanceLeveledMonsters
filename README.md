@@ -7,42 +7,44 @@ Features:
 * Increased Monster Health / Attack based on distance from spawn
 	* Configurable per monster
 * Increased EXP / Drops
+* Everything configurable per world
 
 Inspired by:
 
 https://github.com/Rhidlor/ScalingMobDifficulty
 
 
-```
 Commands:
 
+```
 /DistanceLevel                                show current monster scaling in your area
 /DistanceLevel [X-Coord] [Y-Coord]            show current monster scaling at the coordinates
 /DistanceLevel [X-Coord] [Y-Coord] [world]    show current monster scaling at the coordinates / world
                                               only usable from the console
-                                              
-World-based configuration is not yet supported, but the command needs a world to calculate if the sender is not in a world
 ```
 
-
-On first load and whenever "ResetToDefault" is missing from the file "config.yml" the following settings will be set:
-
+Add any worlds you wish to manage into the list in config.yml
 
 ```
-"ResetToDefault"    false   // Set to True or delete to reset config to defaults at next startup
-
-"LevelDistance"     1000    // Adds a level every X blocks, partial levels apply
-"ExpMultiplier"     0.1     // Additional EXP per level, 1.0 meaning for each level you get the full EXP amount again
-"DropMultiplier"    0.1     // Additional Drops per level, 1.0 meaning for each level you get the full Drop amount again
-                            // only works for stackables, rounds down
+Worlds:
+  - world
+  - world_nether
+  - world_the_end
 ```
 
-Replace "Monster" with the monstername, as pregenerated after first starting the plugin.
+Any world managed needs a configuration like the one below, copy and past the example in the file and rename "world" to your world name
+
+```
+world:
+  LevelDistance: 1000
+  Scaling:
+    ExpMultiplier: 0.1
+    DropMultiplier: 0.1
+    Blaze:
+      Health: 0.5
+      Attack: 0.3
+...
+```
 
 Adds X health / X attack to the monster every level. 
 Enderdragons don't scale.
-
-```
-"MonsterHealthScaling"      1.0
-"MonsterAttackScaling"      1.0
-```
