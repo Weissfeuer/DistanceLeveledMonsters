@@ -57,27 +57,27 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         double monsterHealthScaling = 0.0;
         // get multiplier if monster configured
         if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
-	        if (mob instanceof Blaze) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Health"));
-	        if (mob instanceof Spider)			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Health"));
-	        if (mob instanceof CaveSpider)		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Health"));
-	        if (mob instanceof Enderman) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Health"));
-	        if (mob instanceof Zombie) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Health"));
-	        if (mob instanceof PigZombie) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Health"));
-	        if (mob instanceof ZombieVillager) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Health"));
-	        if (mob instanceof Husk) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Health"));
-	        if (mob instanceof Drowned) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Health"));
-	        if (mob instanceof Silverfish) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Health"));
-	        if (mob instanceof Skeleton) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Health"));
-	        if (mob instanceof WitherSkeleton) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Health"));
-	        if (mob instanceof Stray) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Health"));
-	        if (mob instanceof Witch) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Health"));
-	        if (mob instanceof Wither) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Health"));
-	        if (mob instanceof Creeper) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Health"));
-	        if (mob instanceof Evoker) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Health"));
-	        if (mob instanceof Vindicator) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Health"));
-	        if (mob instanceof Vex) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Health"));
-	        if (mob instanceof Guardian) 		monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Health"));
-	        if (mob instanceof ElderGuardian) 	monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Health"));
+	        if (mob instanceof Blaze)           monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Health"));
+	        if (mob instanceof Spider)          monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Health"));
+	        if (mob instanceof CaveSpider)      monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Health"));
+	        if (mob instanceof Enderman)        monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Health"));
+	        if (mob instanceof Zombie)          monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Health"));
+	        if (mob instanceof PigZombie)       monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Health"));
+	        if (mob instanceof ZombieVillager)  monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Health"));
+	        if (mob instanceof Husk)            monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Health"));
+	        if (mob instanceof Drowned)         monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Health"));
+	        if (mob instanceof Silverfish)      monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Health"));
+	        if (mob instanceof Skeleton)        monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Health"));
+	        if (mob instanceof WitherSkeleton)  monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Health"));
+	        if (mob instanceof Stray)           monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Health"));
+	        if (mob instanceof Witch)           monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Health"));
+	        if (mob instanceof Wither)          monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Health"));
+	        if (mob instanceof Creeper)         monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Health"));
+	        if (mob instanceof Evoker)          monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Health"));
+	        if (mob instanceof Vindicator)      monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Health"));
+	        if (mob instanceof Vex)             monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Health"));
+	        if (mob instanceof Guardian)        monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Health"));
+	        if (mob instanceof ElderGuardian)   monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Health"));
         }
         
         if (monsterHealthScaling > 0.0) {
@@ -99,27 +99,27 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         double monsterAttackScaling = 0.0;
         // get multiplier if monster configured
         if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
-	        if (mob instanceof Blaze) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Attack"));
-	        if (mob instanceof Spider)			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Attack"));
-	        if (mob instanceof CaveSpider)		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Attack"));
-	        if (mob instanceof Enderman) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Attack"));
-	        if (mob instanceof Zombie) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Attack"));
-	        if (mob instanceof PigZombie) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Attack"));
-	        if (mob instanceof ZombieVillager) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Attack"));
-	        if (mob instanceof Husk) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Attack"));
-	        if (mob instanceof Drowned) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Attack"));
-	        if (mob instanceof Silverfish) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Attack"));
-	        if (mob instanceof Skeleton) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Attack"));
-	        if (mob instanceof WitherSkeleton) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Attack"));
-	        if (mob instanceof Stray) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Attack"));
-	        if (mob instanceof Witch) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Attack"));
-	        if (mob instanceof Wither) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Attack"));
-	        if (mob instanceof Creeper) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Attack"));
-	        if (mob instanceof Evoker) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Attack"));
-	        if (mob instanceof Vindicator) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Attack"));
-	        if (mob instanceof Vex) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Attack"));
-	        if (mob instanceof Guardian) 		monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Attack"));
-	        if (mob instanceof ElderGuardian) 	monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Attack"));
+	        if (mob instanceof Blaze)           monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Attack"));
+	        if (mob instanceof Spider)          monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Attack"));
+	        if (mob instanceof CaveSpider)      monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.CaveSpider.Attack"));
+	        if (mob instanceof Enderman)        monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Enderman.Attack"));
+	        if (mob instanceof Zombie)          monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Zombie.Attack"));
+	        if (mob instanceof PigZombie)       monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.PigZombie.Attack"));
+	        if (mob instanceof ZombieVillager)  monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ZombieVillager.Attack"));
+	        if (mob instanceof Husk)            monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Husk.Attack"));
+	        if (mob instanceof Drowned)         monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Drowned.Attack"));
+	        if (mob instanceof Silverfish)      monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Silverfish.Attack"));
+	        if (mob instanceof Skeleton)        monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Skeleton.Attack"));
+	        if (mob instanceof WitherSkeleton)  monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.WitherSkeleton.Attack"));
+	        if (mob instanceof Stray)           monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Stray.Attack"));
+	        if (mob instanceof Witch)           monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Witch.Attack"));
+	        if (mob instanceof Wither)          monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Wither.Attack"));
+	        if (mob instanceof Creeper)         monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Creeper.Attack"));
+	        if (mob instanceof Evoker)          monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Evoker.Attack"));
+	        if (mob instanceof Vindicator)      monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vindicator.Attack"));
+	        if (mob instanceof Vex)             monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Vex.Attack"));
+	        if (mob instanceof Guardian)        monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Guardian.Attack"));
+	        if (mob instanceof ElderGuardian)   monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.ElderGuardian.Attack"));
         }
         
         if (monsterAttackScaling > 0.0) {
