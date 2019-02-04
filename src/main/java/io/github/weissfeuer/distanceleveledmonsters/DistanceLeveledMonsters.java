@@ -44,6 +44,7 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
+        // put config into server folder, if it does not already exist
         saveDefaultConfig();
     }
 
@@ -54,6 +55,7 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         Monster mob = (Monster) event.getEntity();
         
         double monsterHealthScaling = 0.0;
+        // get multiplier if monster configured
         if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
 	        if (mob instanceof Blaze) 			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Health"));
 	        if (mob instanceof Spider)			monsterHealthScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Health"));
@@ -95,6 +97,7 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         Monster mob = (Monster) event.getDamager();
         
         double monsterAttackScaling = 0.0;
+        // get multiplier if monster configured
         if (getConfig().getInt(mob.getWorld().getName() + ".LevelDistance") != 0) {
 	        if (mob instanceof Blaze) 			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Blaze.Attack"));
 	        if (mob instanceof Spider)			monsterAttackScaling = (getConfig().getDouble(mob.getWorld().getName() + ".Scaling.Spider.Attack"));
@@ -203,9 +206,8 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     				World world = sender.getServer().getWorld(args[2]);
     				if (world == null) {
     					sender.sendMessage("World does not exist");
-    					return true;
     				}
-    				if (getConfig().getInt(world.getName() + ".LevelDistance") != 0) {
+    				else if (getConfig().getInt(world.getName() + ".LevelDistance") != 0) {
     					Location testLocation = new Location (world, X, Z, 0.0);
     					sender.sendMessage("Monsterlevel at position " + X + " / " + Z + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt(world.getName() + ".LevelDistance"))));
     				}
