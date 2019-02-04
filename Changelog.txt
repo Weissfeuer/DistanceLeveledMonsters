@@ -1,5 +1,9 @@
 DistanceLeveledMonsters Changelog:
 
+--- 1.2.0 ---
+
+ * /DistanceLevel [X-Coord] [Y-Coord] [world] can now be used from the console
+
 --- 1.1.0 ---
 
  * Added coordinate option to command /DistanceLevel [X-Coord] [Y-Coord]

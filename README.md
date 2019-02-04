@@ -16,8 +16,12 @@ https://github.com/Rhidlor/ScalingMobDifficulty
 ```
 Commands:
 
-/DistanceLevel                        show current monster scaling in your area
-/DistanceLevel [X-Coord] [Y-Coord]    show current monster scaling at the coordinates
+/DistanceLevel                                show current monster scaling in your area
+/DistanceLevel [X-Coord] [Y-Coord]            show current monster scaling at the coordinates
+/DistanceLevel [X-Coord] [Y-Coord] [world]    show current monster scaling at the coordinates / world
+                                              only usable from the console
+                                              
+World-based configuration is not yet supported, but the command needs a world to calculate if the sender is not in a world
 ```
 
 

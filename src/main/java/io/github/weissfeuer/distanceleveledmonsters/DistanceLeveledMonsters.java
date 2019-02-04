@@ -2,8 +2,35 @@
 package io.github.weissfeuer.distanceleveledmonsters;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Drowned;
+import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Evoker;
+import org.bukkit.entity.Guardian;
+import org.bukkit.entity.Husk;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Silverfish;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Spider;
+import org.bukkit.entity.Stray;
+import org.bukkit.entity.Vex;
+import org.bukkit.entity.Vindicator;
+import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieVillager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -11,10 +38,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.Location;
 
 public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
 
@@ -212,6 +235,28 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     		}
     		else {
     			sender.sendMessage("This command can only be run by a player.");
+    		}
+    		return true;
+    	}
+    	// manual coordinate option of the command /DistanceLevel + manual world
+    	if (cmd.getName().equalsIgnoreCase("DistanceLevel") && args.length == 3) {
+    		if (sender instanceof ConsoleCommandSender) {
+    			try {
+    				double X = Double.parseDouble(args[0]);
+    				double Y = Double.parseDouble(args[1]);
+    				World world = sender.getServer().getWorld(args[2]);
+    				if (world == null) {
+    					sender.sendMessage("World does not exist");
+    					return true;
+    				}
+        			Location testLocation = new Location (world, X, Y, 0.0);
+        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt("LevelDistance"))));
+        		} catch (NumberFormatException e) {
+        			return false;
+        		}
+    		}
+    		else {
+    			return false;
     		}
     		return true;
     	}
