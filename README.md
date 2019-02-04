@@ -18,8 +18,8 @@ Commands:
 
 ```
 /DistanceLevel                                show current monster scaling in your area
-/DistanceLevel [X-Coord] [Y-Coord]            show current monster scaling at the coordinates
-/DistanceLevel [X-Coord] [Y-Coord] [world]    show current monster scaling at the coordinates / world
+/DistanceLevel [X-Coord] [Z-Coord]            show current monster scaling at the coordinates
+/DistanceLevel [X-Coord] [Z-Coord] [world]    show current monster scaling at the coordinates / world
                                               only usable from the console
 ```
 

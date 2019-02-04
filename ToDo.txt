@@ -8,4 +8,4 @@ ToDo focus:
  
 ToDo redesign : 
  
- * Scaling based on world / new config formal (xml?)
+ *

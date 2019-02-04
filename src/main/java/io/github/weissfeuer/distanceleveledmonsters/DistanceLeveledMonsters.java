@@ -48,68 +48,6 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
         saveDefaultConfig();
     }
 
-    /*
-    private void loadConfig() {
-        if (getConfig().get("ResetToDefaults") == null || getConfig().getBoolean("ResetToDefaults") == true) {
-        	getConfig().set("ResetToDefaults", false);
-
-            getConfig().set("LevelDistance", 1000);				// Adds a level every X blocks, partial levels apply
-            
-            													// Set any to 0.0 to disable
-            
-            getConfig().set("ExpMultiplier", 0.05);				// Additional EXP per level, 1.0 meaning for each level you get the full EXP amount again
-            getConfig().set("DropMultiplier", 0.05);				// Additional Drops per level, 1.0 meaning for each level you get the full Drop amount again
-            													// only works for stackables, rounds down
-            												
-            getConfig().set("BlazeHealthScaling", 0.5);			// Adds 1 health every 1/x level - the calculation is a reverse, a higher number means more health each level
-            getConfig().set("BlazeAttackScaling", 0.3);			// Same for damage
-            getConfig().set("CaveSpiderHealthScaling", 0.25);	// set any to 0.0 to disable scaling
-            getConfig().set("CaveSpiderAttackScaling", 0.1);
-            getConfig().set("CreeperHealthScaling", 0.25);
-            getConfig().set("CreeperAttackScaling", 0.75);
-            getConfig().set("DrownedHealthScaling", 0.33);
-            getConfig().set("DrownedAttackScaling", 0.33);
-            getConfig().set("ElderGuardianHealthScaling", 0.15);
-            getConfig().set("ElderGuardianAttackScaling", 0.15);
-            getConfig().set("EndermanHealthScaling", 0.25);
-            getConfig().set("EndermanAttackScaling", 0.5);
-            // Endermite
-            getConfig().set("EvokerHealthScaling", 0.1);
-            getConfig().set("EvokerAttackScaling", 0.1);
-            getConfig().set("GuardianHealthScaling", 0.25);
-            getConfig().set("GuardianAttackScaling", 0.25);
-            getConfig().set("HuskHealthScaling", 0.25);
-            getConfig().set("HuskAttackScaling", 0.50);
-            getConfig().set("PigZombieHealthScaling", 0.33);
-            getConfig().set("PigZombieAttackScaling", 0.5);
-            getConfig().set("SilverfishHealthScaling", 0.1);
-            getConfig().set("SilverfishAttackScaling", 0.25);
-            getConfig().set("SkeletonHealthScaling", 0.25);
-            getConfig().set("SkeletonAttackScaling", 0.25);
-            getConfig().set("SpiderHealthScaling", 0.33);
-            getConfig().set("SpiderAttackScaling", 0.33);
-            getConfig().set("StrayHealthScaling", 0.15);
-            getConfig().set("StrayAttackScaling", 0.25);
-            getConfig().set("VexHealthScaling", 0.0);
-            getConfig().set("VexAttackScaling", 0.15);
-            getConfig().set("VindicatorHealthScaling", 0.20);
-            getConfig().set("VindicatorAttackScaling", 0.20);
-            getConfig().set("WitchHealthScaling", 0.25);
-            getConfig().set("WitchAttackScaling", 0.5);
-            getConfig().set("WitherSkeletonHealthScaling", 0.15);
-            getConfig().set("WitherSkeletonAttackScaling", 0.2);
-            getConfig().set("WitherHealthScaling", 0.1);
-            getConfig().set("WitherAttackScaling", 0.1);
-            getConfig().set("ZombieHealthScaling", 0.33);
-            getConfig().set("ZombieAttackScaling", 0.33); 
-            getConfig().set("ZombieVillagerHealthScaling", 0.40);
-            getConfig().set("ZombieVillagerAttackScaling", 0.50);
-            
-        } else getConfig().options().copyDefaults(true);
-        saveConfig();
-    }
-    */
-
     @EventHandler
     // On Spawn: Scale Health
     public void onMonsterSpawn(EntitySpawnEvent event) {
@@ -238,9 +176,9 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     			if (getConfig().getInt(player.getWorld().getName() + ".LevelDistance") != 0) {
 	    			try {
 	    				double X = Double.parseDouble(args[0]);
-	    				double Y = Double.parseDouble(args[1]);
-	        			Location testLocation = new Location (player.getWorld(), X, Y, 0.0);
-	        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt(player.getWorld().getName() + ".LevelDistance"))));
+	    				double Z = Double.parseDouble(args[1]);
+	        			Location testLocation = new Location (player.getWorld(), X, Z, 0.0);
+	        			sender.sendMessage("Monsterlevel at position " + X + " / " + Z + " : " + Math.round((int) testLocation.distance(player.getWorld().getSpawnLocation()) / (getConfig().getInt(player.getWorld().getName() + ".LevelDistance"))));
 	        		} catch (NumberFormatException e) {
 	        			return false;
 	        		}
@@ -256,15 +194,21 @@ public class DistanceLeveledMonsters extends JavaPlugin implements Listener {
     		if (sender instanceof ConsoleCommandSender) {
     			try {
     				double X = Double.parseDouble(args[0]);
-    				double Y = Double.parseDouble(args[1]);
+    				double Z = Double.parseDouble(args[1]);
     				World world = sender.getServer().getWorld(args[2]);
     				if (world == null) {
     					sender.sendMessage("World does not exist");
     					return true;
     				}
-        			Location testLocation = new Location (world, X, Y, 0.0);
-        			sender.sendMessage("Monsterlevel at position " + X + " / " + Y + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt(world.getName() + ".LevelDistance"))));
-        		} catch (NumberFormatException e) {
+    				if (getConfig().getInt(world.getName() + ".LevelDistance") != 0) {
+    					Location testLocation = new Location (world, X, Z, 0.0);
+    					sender.sendMessage("Monsterlevel at position " + X + " / " + Z + " : " + Math.round((int) testLocation.distance(world.getSpawnLocation()) / (getConfig().getInt(world.getName() + ".LevelDistance"))));
+    				}
+    				else {
+    					sender.sendMessage("World is not managed");
+    					return true;
+    				}
+    			} catch (NumberFormatException e) {
         			return false;
         		}
     		}

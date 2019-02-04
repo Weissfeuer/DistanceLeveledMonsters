@@ -1,5 +1,5 @@
 name: DistanceLeveledMonsters
-version: 1.3.0
+version: 1.3.1
 api-version: 1.13
 author: Weissfeuer
 website: https://github.com/Weissfeuer/DistanceLeveledMonsters
@@ -8,4 +8,4 @@ main: io.github.weissfeuer.distanceleveledmonsters.DistanceLeveledMonsters
 commands:
    DistanceLevel:
       description: Displays the monster level scaling at your current position.
-      usage: /DistanceLevel [X-Coord] [Y-Coord]
+      usage: /DistanceLevel [X-Coord] [Z-Coord]
